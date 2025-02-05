@@ -1,38 +1,37 @@
-import React, { useState} from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import {
- 
   MapPin,
   Calendar,
   Bell,
   Home,
   Clock,
   Users,
-
   Bus,
   CreditCard,
   Menu,
-  X
-} from 'lucide-react';
-import {Link} from 'react-router-dom'
+  X,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 const UserDashboard = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [departure, setDeparture] = useState('');
-  const [destination, setDestination] = useState('');
-  const [departureDate, setDepartureDate] = useState('');
+  const [departure, setDeparture] = useState("");
+  const [destination, setDestination] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedRoute, setSelectedRoute] = useState(null);
 
-
-
   const handleSearch = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/route/search', {
-        params: { departure, destination, departureDate, }
-      });
+      const response = await axios.get(
+        "http://localhost:5000/api/route/search",
+        {
+          params: { departure, destination, departureDate },
+        }
+      );
       setSearchResults(response.data);
     } catch (error) {
-      console.error('Error searching trips:', error);
+      console.error("Error searching trips:", error);
     }
   };
 
@@ -44,27 +43,41 @@ const UserDashboard = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <Bus className="h-8 w-8 text-orange-500" />
-              <span className="ml-2 text-xl font-bold text-gray-800">BusGo</span>
+              <span className="ml-2 text-xl font-bold text-gray-800">
+                BusGo
+              </span>
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
-              <Link to="/" className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors">
+              <Link
+                to="/"
+                className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
+              >
                 <Home className="w-4 h-4" />
                 <span>Trang chủ</span>
               </Link>
-              <a href="#" className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors">
+              <Link
+                to="/"
+                className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
+              >
                 <Calendar className="w-4 h-4" />
                 <span>Lịch trình</span>
-              </a>
-              <a href="#" className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors">
+              </Link>
+              <Link
+                to="/"
+                className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
+              >
                 <CreditCard className="w-4 h-4" />
                 <span>Vé của tôi</span>
-              </a>
-              <a href="#" className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors">
+              </Link>
+              <Link
+                to="/exchange"
+                className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
+              >
                 <Bell className="w-4 h-4" />
-                <span>Thông báo</span>
-              </a>
+                <span>Trao đổi vé</span>
+              </Link>
             </nav>
 
             {/* Mobile menu button */}
@@ -72,7 +85,11 @@ const UserDashboard = () => {
               className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
               onClick={() => setMenuOpen(!menuOpen)}
             >
-              {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {menuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -81,10 +98,30 @@ const UserDashboard = () => {
         {menuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a href="#" className="block px-3 py-2 text-gray-600 hover:bg-gray-50">Trang chủ</a>
-              <a href="#" className="block px-3 py-2 text-gray-600 hover:bg-gray-50">Lịch trình</a>
-              <a href="#" className="block px-3 py-2 text-gray-600 hover:bg-gray-50">Vé của tôi</a>
-              <a href="#" className="block px-3 py-2 text-gray-600 hover:bg-gray-50">Thông báo</a>
+              <a
+                href="#"
+                className="block px-3 py-2 text-gray-600 hover:bg-gray-50"
+              >
+                Trang chủ
+              </a>
+              <a
+                href="#"
+                className="block px-3 py-2 text-gray-600 hover:bg-gray-50"
+              >
+                Lịch trình
+              </a>
+              <a
+                href="#"
+                className="block px-3 py-2 text-gray-600 hover:bg-gray-50"
+              >
+                Vé của tôi
+              </a>
+              <a
+                href="#"
+                className="block px-3 py-2 text-gray-600 hover:bg-gray-50"
+              >
+                Thông báo
+              </a>
             </div>
           </div>
         )}
@@ -94,8 +131,9 @@ const UserDashboard = () => {
       <main className="max-w-7xl mx-auto px-4 pt-24 pb-8">
         {/* Search Section */}
         <div className="bg-white rounded-xl shadow-lg p-6">
-          <h1 className="text-2xl font-bold text-gray-800 mb-6">Tìm chuyến xe của bạn</h1>
-
+          <h1 className="text-2xl font-bold text-gray-800 mb-6">
+            Tìm chuyến xe của bạn
+          </h1>
 
           {/* Search Form */}
           <div className="grid md:grid-cols-3 gap-4">
@@ -141,7 +179,9 @@ const UserDashboard = () => {
         {/* Search Results */}
         {searchResults.length > 0 && (
           <div className="mt-8 space-y-4">
-            <h2 className="text-xl font-bold text-gray-800">Kết quả tìm kiếm</h2>
+            <h2 className="text-xl font-bold text-gray-800">
+              Kết quả tìm kiếm
+            </h2>
             {searchResults.map((route) => (
               <div
                 key={route._id}
@@ -153,24 +193,32 @@ const UserDashboard = () => {
                     <div className="flex items-center space-x-4">
                       <Bus className="h-8 w-8 text-orange-500" />
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-800">{route.startPoint} - {route.endPoint}</h3>
-                        <p className="text-sm text-gray-500">Nhà xe {route.busOperator || 'Phương Trang'}</p>
+                        <h3 className="text-lg font-semibold text-gray-800">
+                          {route.startPoint} - {route.endPoint}
+                        </h3>
+                        <p className="text-sm text-gray-500">
+                          Nhà xe {route.busOperator || "Phương Trang"}
+                        </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-bold text-orange-500">{route.price?.toLocaleString() || '0'} VND</p>
-                      <p className="text-sm text-gray-500">{route.availableSeats || 0} ghế trống</p>
+                      <p className="text-lg font-bold text-orange-500">
+                        {route.price?.toLocaleString() || "0"} VND
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        {route.availableSeats || 0} ghế trống
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex items-center justify-between text-sm text-gray-600">
                     <div className="flex items-center space-x-2">
                       <Clock className="h-4 w-4" />
-                      <span>{route.duration || '4 giờ'}</span>
+                      <span>{route.duration || "4 giờ"}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Users className="h-4 w-4" />
-                      <span>{route.busType || 'Giường nằm'}</span>
+                      <span>{route.busType || "Giường nằm"}</span>
                     </div>
                   </div>
                 </div>
@@ -182,33 +230,48 @@ const UserDashboard = () => {
         {/* Selected Route Details */}
         {selectedRoute && (
           <div className="mt-8 bg-white rounded-xl shadow-lg p-6">
-            <h2 className="text-xl font-bold text-gray-800 mb-6">Chi tiết chuyến xe</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-6">
+              Chi tiết chuyến xe
+            </h2>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h3 className="font-semibold text-gray-700 mb-4">Thông tin chuyến đi</h3>
+                <h3 className="font-semibold text-gray-700 mb-4">
+                  Thông tin chuyến đi
+                </h3>
                 <div className="space-y-3">
                   <p className="flex items-center text-gray-600">
                     <MapPin className="h-5 w-5 mr-2 text-orange-500" />
-                    <span><strong>Điểm đi:</strong> {selectedRoute.startPoint}</span>
+                    <span>
+                      <strong>Điểm đi:</strong> {selectedRoute.startPoint}
+                    </span>
                   </p>
                   <p className="flex items-center text-gray-600">
                     <MapPin className="h-5 w-5 mr-2 text-orange-500" />
-                    <span><strong>Điểm đến:</strong> {selectedRoute.endPoint}</span>
+                    <span>
+                      <strong>Điểm đến:</strong> {selectedRoute.endPoint}
+                    </span>
                   </p>
                   <p className="flex items-center text-gray-600">
                     <Clock className="h-5 w-5 mr-2 text-orange-500" />
-                    <span><strong>Thời gian:</strong> {selectedRoute.duration || '4 giờ'}</span>
+                    <span>
+                      <strong>Thời gian:</strong>{" "}
+                      {selectedRoute.duration || "4 giờ"}
+                    </span>
                   </p>
                 </div>
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-700 mb-4">Chi tiết giá vé</h3>
+                <h3 className="font-semibold text-gray-700 mb-4">
+                  Chi tiết giá vé
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <div className="flex justify-between mb-2">
                     <span className="text-gray-600">Giá vé</span>
-                    <span className="font-semibold">{selectedRoute.price?.toLocaleString() || '0'} VND</span>
+                    <span className="font-semibold">
+                      {selectedRoute.price?.toLocaleString() || "0"} VND
+                    </span>
                   </div>
                   <div className="flex justify-between mb-2">
                     <span className="text-gray-600">Phí dịch vụ</span>
@@ -218,17 +281,17 @@ const UserDashboard = () => {
                     <div className="flex justify-between">
                       <span className="font-semibold">Tổng cộng</span>
                       <span className="font-bold text-orange-500">
-                        {((selectedRoute.price || 0) + 20000).toLocaleString()} VND
+                        {((selectedRoute.price || 0) + 20000).toLocaleString()}{" "}
+                        VND
                       </span>
                     </div>
                   </div>
                 </div>
-
-                <Link to="/busbooking">
-  <button className="mt-4 w-full px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg shadow-md transition-colors duration-200">
-    Đặt vé ngay
-  </button>
-</Link>
+                <Link to="/booking">
+                  <button className="mt-4 w-full py-3 bg-orange-500 text-white rounded-lg shadow-md hover:bg-orange-600">
+                    Đặt vé ngay
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -239,5 +302,3 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
-
-

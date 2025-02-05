@@ -10,6 +10,8 @@ import RouteFilters from './Components/RouteFilters';
 import RouteList from './Components/RouteList';
 import SeatSelection from './Components/SeatSelection';
 import BusBooking from './Components/BusBooking';
+import TicketExchange from './Components/TicketExchange';
+
 // App.js
 function App() {
   const [routes, setRoutes] = useState([]);
@@ -76,10 +78,11 @@ function App() {
             </>
           } />
           <Route path="/booking" element={<BusBooking />} />
-        </Routes>
-      
-      </div>
-    </Router>
+          <Route path="/exchange" element={<TicketExchange /> } />
+          
+         </Routes>
+         </div>
+        </Router>
   );
 }
 
