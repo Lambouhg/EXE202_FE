@@ -18,6 +18,9 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
+          <Link to="/routes-list" className="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+              Đặt vé 
+            </Link>
             <Link to="/route" className="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
               Tuyến Đường
             </Link>

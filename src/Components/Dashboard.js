@@ -224,9 +224,11 @@ const UserDashboard = () => {
                   </div>
                 </div>
 
-                <button className="mt-4 w-full px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg shadow-md transition-colors duration-200">
-                  Đặt vé ngay
-                </button>
+                <Link to="/busbooking">
+  <button className="mt-4 w-full px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg shadow-md transition-colors duration-200">
+    Đặt vé ngay
+  </button>
+</Link>
               </div>
             </div>
           </div>
@@ -237,3 +239,5 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
+
+
