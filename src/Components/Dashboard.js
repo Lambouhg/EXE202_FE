@@ -24,7 +24,7 @@ const UserDashboard = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        "http://exe202-backend-mrx8.onrender.com/api/route/search",
+        "https://exe202-backend-l4pe.onrender.com/api/route/search",
         {
           params: { departure, destination, departureDate },
         }
