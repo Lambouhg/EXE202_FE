@@ -15,7 +15,7 @@ const AddRouteForm = () => {
   // Lấy danh sách công ty xe buýt
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/busCompany/get-companies")
+      .get("http://exe202-backend-mrx8.onrender.com/api/busCompany/get-companies")
       .then((response) => setCompanies(response.data))
       .catch((error) => console.error("Lỗi tải công ty:", error));
   }, []);
@@ -35,7 +35,7 @@ const AddRouteForm = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:5000/api/route/createRoute",
+        "http://exe202-backend-mrx8.onrender.com/api/route/createRoute",
         formattedData
       );
       toast.success(response.data.message);

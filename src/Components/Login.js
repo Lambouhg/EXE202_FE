@@ -13,7 +13,7 @@ function Login() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const response = await axios.post('http://exe202-backend-mrx8.onrender.com/api/auth/login', { email, password });
       navigate('/dashboard');
       
       // Sau khi đăng nhập thành công, chuyển đến trang chủ người dùng (Dashboard)

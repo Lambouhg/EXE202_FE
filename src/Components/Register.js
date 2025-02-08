@@ -12,7 +12,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', { name, email, password, phone });
+      const response = await axios.post('http://exe202-backend-mrx8.onrender.com/api/auth/register', { name, email, password, phone });
       alert(response.data.message);
       // Handle successful registration, redirect to login or dashboard
     } catch (error) {
