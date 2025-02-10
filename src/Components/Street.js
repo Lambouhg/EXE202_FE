@@ -15,7 +15,7 @@ const AddRouteForm = () => {
   // Lấy danh sách công ty xe buýt
   useEffect(() => {
     axios
-      .get("https://exe202-backend-l4pe.onrender.com/api/busCompany/get-companies")
+      .get("https://exe202-backend-mxr2.onrender.com/api/busCompany/get-companies")
       .then((response) => setCompanies(response.data))
       .catch((error) => console.error("Lỗi tải công ty:", error));
   }, []);
@@ -35,7 +35,7 @@ const AddRouteForm = () => {
       };
 
       const response = await axios.post(
-        "https://exe202-backend-l4pe.onrender.com/api/route/createRoute",
+        "https://exe202-backend-mxr2.onrender.com/api/route/createRoute",
         formattedData
       );
       toast.success(response.data.message);

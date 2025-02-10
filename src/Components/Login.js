@@ -13,7 +13,7 @@ function Login() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post('https://exe202-backend-l4pe.onrender.com/api/auth/login', { email, password });
+      const response = await axios.post('https://exe202-backend-mxr2.onrender.com/api/auth/login', { email, password });
       navigate('/dashboard');
       
       // Sau khi đăng nhập thành công, chuyển đến trang chủ người dùng (Dashboard)

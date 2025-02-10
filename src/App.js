@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     const fetchRoutes = async () => {
-      const response = await fetch('https://exe202-backend-l4pe.onrender.com/api/route');
+      const response = await fetch('https://exe202-backend-mxr2.onrender.com/api/route');
       const data = await response.json();
       setRoutes(data);
     };
