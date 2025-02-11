@@ -12,7 +12,7 @@ const Header = () => {
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="text-2xl font-bold text-blue-600">
-              BusTicket
+              Go Tic 
             </Link>
           </div>
 

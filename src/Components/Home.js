@@ -15,7 +15,7 @@ function Home() {
       to: 'Hồ Chí Minh', 
       price: '500.000', 
       duration: '30h',
-      image: '/api/placeholder/400/300',
+      image: '/images/1.jpg',  
       departureTime: '7:00',
       type: 'Giường nằm'
     },
@@ -25,7 +25,7 @@ function Home() {
       to: 'Đà Nẵng', 
       price: '400.000', 
       duration: '20h',
-      image: '/api/placeholder/400/300',
+      image: '/images/2.jpg', 
       departureTime: '8:30',
       type: 'Giường nằm'
     },
@@ -35,7 +35,7 @@ function Home() {
       to: 'Đà Nẵng', 
       price: '450.000', 
       duration: '25h',
-      image: '/api/placeholder/400/300',
+      image: '/images/2.jpg',  
       departureTime: '6:00',
       type: 'Giường nằm'
     },
@@ -354,12 +354,12 @@ function Home() {
               </div>
               <div className="mt-4">
                 <p className="text-gray-300">Hotline: 1900 xxxx</p>
-                <p className="text-gray-300">Email: support@busticket.vn</p>
+                <p className="text-gray-300">Email: support@GoTic.vn</p>
               </div>
             </div>
           </div>
           <div className="mt-8 border-t border-gray-700 pt-8 text-center">
-            <p className="text-gray-300">&copy; 2025 BusTicket. All rights reserved.</p>
+            <p className="text-gray-300">&copy; 2025 Go Tic. All rights reserved.</p>
           </div>
         </div>
       </footer>

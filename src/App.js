@@ -11,6 +11,9 @@ import RouteList from './Components/RouteList';
 import SeatSelection from './Components/SeatSelection';
 import BusBooking from './Components/BusBooking';
 import TicketExchange from './Components/TicketExchange';
+import TicketPost from './Components/PostTicket'; // Đăng vé
+import TicketList from './Components/TicketList';
+import Chat from './Components/ChatPage';
 
 // App.js
 function App() {
@@ -58,12 +61,21 @@ function App() {
     <Router>
       <div className="max-w-7xl mx-auto px-6 py-8">
         <Routes>
+          {/* Trang chủ */}
           <Route path="/" element={<Home />} />
+          
+          {/* Các trang đăng nhập và đăng ký */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          
+          {/* Dashboard người dùng */}
           <Route path="/dashboard" element={<UserDashboard />} />
+
+          {/* Quản lý tuyến đường */}
           <Route path="/Route" element={<RouteManagement />} />
           <Route path="/add-routes" element={<Street />} />
+
+          {/* Tìm kiếm tuyến đường */}
           <Route path="/routes-list" element={
             <>
               <RouteFilters filters={filters} setFilters={setFilters} />
@@ -77,12 +89,21 @@ function App() {
               )}
             </>
           } />
+
+          {/* Trang đặt vé */}
           <Route path="/booking" element={<BusBooking />} />
-          <Route path="/exchange" element={<TicketExchange /> } />
+
+          {/* Trang trao đổi vé */}
+          <Route path="/exchange" element={<TicketExchange />} />
           
-         </Routes>
-         </div>
-        </Router>
+          {/* Trang đăng vé */}
+          <Route path="/post" element={<TicketPost />} /> {/* Đây là trang đăng vé */}
+          <Route path="/list" element={<TicketList />} />
+          <Route path="/chat" element={<Chat  /> } />
+          
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
