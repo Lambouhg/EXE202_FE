@@ -44,7 +44,7 @@ const UserDashboard = () => {
             <div className="flex items-center">
               <Bus className="h-8 w-8 text-orange-500" />
               <span className="ml-2 text-xl font-bold text-gray-800">
-                BusGo
+                GoTic 
               </span>
             </div>
 
