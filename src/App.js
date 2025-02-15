@@ -14,7 +14,12 @@ import TicketExchange from './Components/TicketExchange';
 import TicketPost from './Components/PostTicket'; // Đăng vé
 import TicketList from './Components/TicketList';
 import Chat from './Components/ChatPage';
-
+import AdminDashboard from './Components/admin/adminDashboard';
+import UsersManagement from './Components/admin/UsersManagement';
+import TicketsManagement from './Components/admin/TicketsManagement';
+import AdminRoutesManagement from './Components/admin/RoutesManagement';
+import Settings from './Components/admin/Settings'; 
+import BusCompany from './Components/admin/company';
 // App.js
 function App() {
   const [routes, setRoutes] = useState([]);
@@ -27,7 +32,7 @@ function App() {
 
   useEffect(() => {
     const fetchRoutes = async () => {
-      const response = await fetch('https://exe202-backend-mxr2.onrender.com/api/route');
+      const response = await fetch('http://localhost:5000/api/route');
       const data = await response.json();
       setRoutes(data);
     };
@@ -59,7 +64,10 @@ function App() {
 
   return (
     <Router>
-      <div className="max-w-7xl mx-auto px-6 py-8">
+   <div className="container mx-auto w-full min-h-screen m-0 p-0">
+
+
+
         <Routes>
           {/* Trang chủ */}
           <Route path="/" element={<Home />} />
@@ -100,7 +108,12 @@ function App() {
           <Route path="/post" element={<TicketPost />} /> {/* Đây là trang đăng vé */}
           <Route path="/list" element={<TicketList />} />
           <Route path="/chat" element={<Chat  /> } />
-          
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/users" element={<UsersManagement />} />
+          <Route path="/routes" element={<AdminRoutesManagement />} />
+          <Route path="/tickets" element={<TicketsManagement />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/company" element={<BusCompany />} />
         </Routes>
       </div>
     </Router>

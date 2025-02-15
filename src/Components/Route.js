@@ -9,7 +9,7 @@ export default function RouteManagement() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://exe202-backend-mxr2.onrender.com/api/route");
+        const response = await fetch("http://localhost:5000/api/route");
         const data = await response.json();
         setRoutes(data);
       } catch (error) {
