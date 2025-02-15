@@ -12,18 +12,40 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+  
     try {
-      const response = await axios.post('https://exe202-backend-mxr2.onrender.com/api/auth/login', { email, password });
-      navigate('/dashboard');
+      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
       
-      // Sau khi đăng nhập thành công, chuyển đến trang chủ người dùng (Dashboard)
-      alert(response.data.message);
+      // Kiểm tra xem API có trả về token và user không
+      if (!response.data.token || !response.data.user) {
+        setError('Dữ liệu trả về không hợp lệ.');
+        return;
+      }
+      
+      const { token, user } = response.data;
+  
+      // Lưu token và thông tin user vào localStorage
+      localStorage.setItem('userToken', token);
+      localStorage.setItem('userInfo', JSON.stringify(user));
+  
+      // Kiểm tra role và điều hướng đến trang phù hợp
+      if (user.role === 'admin') {
+        navigate('/admin');  // Trang cho admin
+      } else {
+        navigate('/dashboard');  // Trang cho user bình thường
+      }
+  
+      alert('Đăng nhập thành công!');
     } catch (error) {
-      setError(error.response ? error.response.data.message : 'Login failed');
+      console.error("Lỗi đăng nhập:", error.response ? error.response.data : error.message);
+      setError(error.response ? error.response.data.message : 'Đăng nhập thất bại. Vui lòng thử lại.');
     } finally {
       setIsLoading(false);
     }
   };
+  
+  
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white rounded-2xl shadow-xl p-8">
