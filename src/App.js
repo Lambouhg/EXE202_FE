@@ -23,7 +23,8 @@ import BusCompany from './Components/admin/company';
 import BookingPage from './Components/users/BookingPage';
 import MyTickets from './Components/users/MyTickets';
   import ExchangeRequests from './Components/users/ExchangeRequests';
-// App.js
+  import BusManagementSystem from './Components/company/Management';
+// App.js 
 function App() {
   const [routes, setRoutes] = useState([]);
   // //const [filters, setFilters] = useState({
@@ -121,6 +122,7 @@ function App() {
           <Route path="/booking/:id" element={<BookingPage />} />
           <Route path="/myticket" element={<MyTickets/>} />
           <Route path="/requests" element={<ExchangeRequests/>} />
+          <Route path="/management" element={<BusManagementSystem />} />
         </Routes>
 
 
