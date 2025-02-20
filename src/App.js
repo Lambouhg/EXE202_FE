@@ -22,6 +22,7 @@ import Settings from './Components/admin/Settings';
 import BusCompany from './Components/admin/company';
 import BookingPage from './Components/users/BookingPage';
 import MyTickets from './Components/users/MyTickets';
+  import ExchangeRequests from './Components/users/ExchangeRequests';
 // App.js
 function App() {
   const [routes, setRoutes] = useState([]);
@@ -119,6 +120,7 @@ function App() {
           <Route path="/company" element={<BusCompany />} />
           <Route path="/booking/:id" element={<BookingPage />} />
           <Route path="/myticket" element={<MyTickets/>} />
+          <Route path="/requests" element={<ExchangeRequests/>} />
         </Routes>
 
 
