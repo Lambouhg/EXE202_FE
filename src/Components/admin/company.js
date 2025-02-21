@@ -41,7 +41,7 @@ const BusCompany = () => {
     }
 
     try {
-      const data = await apiCall('http://localhost:5000/api/admin/bus-companies');
+      const data = await apiCall('https://exe202-backend-2v40.onrender.com/api/admin/bus-companies');
       setBusCompanies(data);
       setStatus({ error: null, success: null });
     } catch (error) {
@@ -63,7 +63,7 @@ const BusCompany = () => {
     }
 
     try {
-      await apiCall('http://localhost:5000/api/admin/bus-companies', 'POST', { name, contact, address });
+      await apiCall('https://exe202-backend-2v40.onrender.com/api/admin/bus-companies', 'POST', { name, contact, address });
       setStatus({ error: null, success: 'Nhà xe đã được thêm thành công!' });
       setName('');
       setContact('');

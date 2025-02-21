@@ -88,7 +88,7 @@ const BookingPage = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/ticket/tickets", {
+      const response = await axios.post("https://exe202-backend-2v40.onrender.com/api/ticket/tickets", {
         route: route._id,
         owner: userId,
         seatNumber,
@@ -96,7 +96,7 @@ const BookingPage = () => {
       });
 
       // Hiển thị thành công
-      navigate("/booking-success", { 
+      navigate("/myticket", { 
         state: { 
           ticketData: response.data,
           routeInfo: route

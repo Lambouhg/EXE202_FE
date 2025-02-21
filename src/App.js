@@ -26,45 +26,8 @@ import MyTickets from './Components/users/MyTickets';
   import BusManagementSystem from './Components/company/Management';
 // App.js 
 function App() {
-  const [routes, setRoutes] = useState([]);
-  // //const [filters, setFilters] = useState({
-  //   time: 'default',
-  //   price: 'default'
-  // });
-  const [selectedRoute, setSelectedRoute] = useState(null);
-  const [seats, setSeats] = useState([]);
-
-  useEffect(() => {
-    const fetchRoutes = async () => {
-      const response = await fetch('http://localhost:5000/api/route');
-      const data = await response.json();
-      setRoutes(data);
-    };
-    fetchRoutes();
-  }, []);
-
-  // const filteredRoutes = routes.filter((route) => {
-  //   const timeMatch =
-  //     filters.time === 'default' ||
-  //     (filters.time === 'early' && route.departureTime < '12:00') ||
-  //     (filters.time === 'late' && route.departureTime >= '12:00');
-  //   const priceMatch =
-  //     filters.price === 'default' ||
-  //     (filters.price === 'asc' && route.price < 300000) ||
-  //     (filters.price === 'desc' && route.price > 300000);
-  //   return timeMatch && priceMatch;
-  // });
-
-  const handleSelectRoute = (route) => {
-    setSelectedRoute(route);
-    setSeats(route.seats);
-  };
-
-  const handleSelectSeat = (index) => {
-    const newSeats = [...seats];
-    newSeats[index].status = newSeats[index].status === 'available' ? 'selected' : 'available';
-    setSeats(newSeats);
-  };
+ 
+  
 
   return (
     <Router>
@@ -87,22 +50,7 @@ function App() {
           <Route path="/Route" element={<RouteManagement />} />
           <Route path="/add-routes" element={<Street />} />
 
-          {/* Tìm kiếm tuyến đường */}
-          <Route path="/routes-list" element={
-            <Route path="/routes-list" element={
-              <>
-                
-                {selectedRoute ? (
-                  <div>
-                    <h2 className="text-xl font-semibold">Chuyến {selectedRoute.startPoint} → {selectedRoute.endPoint}</h2>
-                    <SeatSelection seats={seats} onSelectSeat={handleSelectSeat} />
-                  </div>
-                ) : (
-                  <RouteList routes={routes} onSelectRoute={handleSelectRoute} />
-                )}
-              </>
-            } />
-          } />
+          
           {/* Trang đặt vé */}
           <Route path="/booking" element={<BusBooking />} />
 
