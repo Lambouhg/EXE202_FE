@@ -14,7 +14,7 @@ function Login() {
     setIsLoading(true);
   
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const response = await axios.post('https://exe202-backend-2v40.onrender.com/api/auth/login', { email, password });
       
       // Kiểm tra xem API có trả về token và user không
       if (!response.data.token || !response.data.user) {

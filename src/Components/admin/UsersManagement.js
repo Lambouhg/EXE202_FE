@@ -18,7 +18,7 @@ const UsersManagement = () => {
       return;
     }
 
-    fetch('http://localhost:5000/api/admin/users', {
+    fetch('https://exe202-backend-2v40.onrender.com/api/admin/users', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

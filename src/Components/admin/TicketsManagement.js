@@ -16,7 +16,7 @@ const TicketsManagement = () => {
       return;
     }
 
-    fetch('http://localhost:5000/api/admin/tickets', {
+    fetch('https://exe202-backend-2v40.onrender.com/api/admin/tickets', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

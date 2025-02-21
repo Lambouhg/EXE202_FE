@@ -6,7 +6,7 @@ const AdminRoutesManagement = () => {
 
   useEffect(() => {
     // Fetch routes data from the API
-    fetch('http://localhost:5000/api/admin/routes')
+    fetch('https://exe202-backend-2v40.onrender.com/api/admin/routes')
       .then(response => response.json())
       .then(data => setRoutes(data));
   }, []);
