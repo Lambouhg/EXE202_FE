@@ -42,7 +42,7 @@ const BookingPage = () => {
         try {
           setLoading(true);
           const response = await axios.get(
-            `http://localhost:5000/api/route/routes/${route._id}/booked-seats`
+            `https://exe202-backend-2v40.onrender.com/api/route/routes/${route._id}/booked-seats`
           );
           setBookedSeats(response.data.bookedSeats);
         } catch (err) {
@@ -116,7 +116,7 @@ const BookingPage = () => {
     setIsSubmitting(true);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/ticket/tickets",
+        "https://exe202-backend-2v40.onrender.com/api/ticket/tickets",
         {
           route: route._id,
           owner: userId,
