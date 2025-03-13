@@ -24,6 +24,9 @@ import BookingPage from './Components/users/BookingPage';
 import MyTickets from './Components/users/MyTickets';
   import ExchangeRequests from './Components/users/ExchangeRequests';
   import BusManagementSystem from './Components/company/Management';
+  import UserDetail from './Components/admin/UserDetail';
+  import EditUser from './Components/admin/EditUser';
+  
 // App.js 
 function App() {
  
@@ -63,10 +66,13 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/users" element={<UsersManagement />} />
+          <Route path="/users/:id" element={<UserDetail />} />
+          <Route path="/users/edit/:id" element={<EditUser />} />
+
           <Route path="/routes" element={<AdminRoutesManagement />} />
           <Route path="/tickets" element={<TicketsManagement />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/company" element={<BusCompany />} />
+          <Route path="/bus-companies" element={<BusCompany />} />
           <Route path="/booking/:id" element={<BookingPage />} />
           <Route path="/myticket" element={<MyTickets/>} />
           <Route path="/requests" element={<ExchangeRequests/>} />
