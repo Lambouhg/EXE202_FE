@@ -139,17 +139,22 @@ const BookingPage = () => {
     }
   };
 
-  // Format date
   const formatDate = (dateString) => {
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    };
-    return new Date(dateString).toLocaleDateString("vi-VN", options);
+    if (!dateString) {
+      return "Chưa chọn thời gian";
+    }
+  
+    const date = new Date(dateString);
+    if (isNaN(date)) {
+      console.error("Invalid date:", dateString);
+      return "Ngày không hợp lệ";
+    }
+  
+    // Lấy chuỗi ISO và cắt bỏ phần giây, giữ nguyên múi giờ gốc
+    const [datePart, timePart] = date.toISOString().split("T");
+    const formattedTime = timePart.substring(0, 5); // Lấy giờ:phút (HH:mm)
+  
+    return `${datePart} ${formattedTime}`;
   };
 
   // Kiểm tra ghế đã đặt
