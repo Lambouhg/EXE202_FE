@@ -26,7 +26,7 @@ import MyTickets from './Components/users/MyTickets';
   import BusManagementSystem from './Components/company/Management';
   import UserDetail from './Components/admin/UserDetail';
   import EditUser from './Components/admin/EditUser';
-  
+  import TicketDetail from './Components/users/TicketDetail';
 // App.js 
 function App() {
  
@@ -77,6 +77,7 @@ function App() {
           <Route path="/myticket" element={<MyTickets/>} />
           <Route path="/requests" element={<ExchangeRequests/>} />
           <Route path="/management" element={<BusManagementSystem />} />
+          <Route path="/TicketDetail" element={<TicketDetail />} />
         </Routes>
 
 
