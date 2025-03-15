@@ -322,7 +322,16 @@ const UserDashboard = () => {
                           <p className="text-sm text-gray-500">Thời gian khởi hành:</p>
                           <p className="font-medium flex items-center">
                             <Clock className="w-4 h-4 text-gray-400 mr-2" />
-                            {new Date(route.departureTimes[0]).toLocaleString("vi-VN")}
+                            {new Date(route.departureTimes).toLocaleString('vi-VN', {
+                              year: 'numeric',
+                              month: '2-digit',
+                              day: '2-digit',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              second: '2-digit',
+                              hour12: false, // Đảm bảo hiển thị 24h
+                              timeZone: 'UTC' // Giữ nguyên giờ theo dữ liệu gốc
+                            })}
                           </p>
                         </div>
 
