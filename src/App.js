@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Components/Home';
 import Login from './Components/Login';
@@ -7,8 +7,6 @@ import UserDashboard from './Components/Dashboard';
 import RouteManagement from './Components/Route';
 import Street from './Components/Street';
 //import RouteFilters from './Components/RouteFilters';
-import RouteList from './Components/RouteList';
-import SeatSelection from './Components/SeatSelection';
 import BusBooking from './Components/BusBooking';
 import TicketExchange from './Components/TicketExchange';
 import TicketPost from './Components/PostTicket'; // Đăng vé

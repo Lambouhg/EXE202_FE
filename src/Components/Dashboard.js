@@ -40,13 +40,27 @@ const UserDashboard = () => {
       setError("Đã xảy ra lỗi khi tìm kiếm, vui lòng thử lại.");
     }
   };
-
+  const handleLogout = () => {
+    // Xóa thông tin người dùng khỏi Local Storage
+    localStorage.removeItem("userInfo");
+  
+    // Hoặc xóa toàn bộ Local Storage (nếu cần)
+    // localStorage.clear();
+  
+    console.log("Đã đăng xuất");
+  
+    // Điều hướng về trang đăng nhập (ví dụ sử dụng react-router-dom)
+    window.location.href = "/";
+  };
+  
+  
   return (
     <div className="min-h-screen bg-gray-100 font-sans">
       {/* Header with gradient background */}
       <header className="bg-gradient-to-r from-blue-600 to-indigo-800 shadow-lg fixed w-full top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
+            {/* Logo và tên */}
             <div className="flex items-center">
               <div className="bg-white p-2 rounded-full">
                 <Bus className="h-6 w-6 text-blue-600" />
@@ -56,22 +70,66 @@ const UserDashboard = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-6">
-              <Link to="/" className="flex items-center space-x-2 px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-700 rounded-md transition-all duration-200">
+              <Link
+                to="/"
+                className="flex items-center space-x-2 px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-700 rounded-md transition-all duration-200"
+              >
                 <Home className="w-4 h-4" />
                 <span>Trang chủ</span>
               </Link>
-              <Link to="/" className="flex items-center space-x-2 px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-700 rounded-md transition-all duration-200">
+              <Link
+                to="/"
+                className="flex items-center space-x-2 px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-700 rounded-md transition-all duration-200"
+              >
                 <Calendar className="w-4 h-4" />
                 <span>Lịch trình</span>
               </Link>
-              <Link to="/" className="flex items-center space-x-2 px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-700 rounded-md transition-all duration-200">
+              <Link
+                to="/myticket"
+                className="flex items-center space-x-2 px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-700 rounded-md transition-all duration-200"
+              >
                 <CreditCard className="w-4 h-4" />
                 <span>Vé của tôi</span>
               </Link>
-              <Link to="/exchange" className="flex items-center space-x-2 px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-700 rounded-md transition-all duration-200">
+              <Link
+                to="/requests"
+                className="flex items-center space-x-2 px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-700 rounded-md transition-all duration-200"
+              >
                 <Bell className="w-4 h-4" />
                 <span>Trao đổi vé</span>
               </Link>
+
+              {/* Profile Menu */}
+              <div className="relative">
+                <button
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  className="flex items-center space-x-2 px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-700 rounded-md transition-all duration-200"
+                >
+                  <span>Tài khoản</span>
+                </button>
+                {menuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
+                      Hồ sơ
+                    </Link>
+                    <Link
+                      to="/settings"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
+                      Cài đặt
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
+                      Đăng xuất
+                    </button>
+                  </div>
+                )}
+              </div>
             </nav>
 
             {/* Mobile menu button */}
@@ -84,6 +142,7 @@ const UserDashboard = () => {
           </div>
         </div>
       </header>
+
 
       {/* Mobile Navigation Menu */}
       {menuOpen && (
@@ -264,11 +323,9 @@ const UserDashboard = () => {
                       <div className="flex items-center text-gray-700">
                         <Clock className="w-4 h-4 mr-1 text-orange-500" />
                         <span className="text-sm">
-                          {new Date(route.departureTimes[0]).toLocaleTimeString("vi-VN", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
+                          {route.departureTimes[0].substring(11, 16)}
                         </span>
+
                       </div>
                     </div>
 
@@ -318,7 +375,7 @@ const UserDashboard = () => {
                           </p>
                         </div>
 
-                        <div className="space-y-2">
+                        {/* <div className="space-y-2">
                           <p className="text-sm text-gray-500">Thời gian khởi hành:</p>
                           <p className="font-medium flex items-center">
                             <Clock className="w-4 h-4 text-gray-400 mr-2" />
@@ -333,7 +390,7 @@ const UserDashboard = () => {
                               timeZone: 'UTC' // Giữ nguyên giờ theo dữ liệu gốc
                             })}
                           </p>
-                        </div>
+                        </div> */}
 
                         <button
                           onClick={() => handleBookTicket(route)}

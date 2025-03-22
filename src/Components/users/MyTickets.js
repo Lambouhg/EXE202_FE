@@ -46,23 +46,7 @@ const MyTickets = () => {
     return statusMap[status] || { text: status, color: 'bg-gray-100 text-gray-800', icon: <AlertCircle className="w-4 h-4" /> };
   };
 
-  // Hàm định dạng thời gian
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("vi-VN", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric"
-    });
-  };
-
-  const formatTime = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleTimeString("vi-VN", {
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-  };
+  
 
   const getStatusColor = (status) => {
     return status === "confirmed"
