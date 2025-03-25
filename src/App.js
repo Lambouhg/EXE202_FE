@@ -25,6 +25,7 @@ import MyTickets from './Components/users/MyTickets';
   import UserDetail from './Components/admin/UserDetail';
   import EditUser from './Components/admin/EditUser';
   import TicketDetail from './Components/users/TicketDetail';
+  import Headeruser from './Components/users/Header';
 // App.js 
 function App() {
  
@@ -76,10 +77,15 @@ function App() {
           <Route path="/requests" element={<ExchangeRequests/>} />
           <Route path="/management" element={<BusManagementSystem />} />
           <Route path="/TicketDetail" element={<TicketDetail />} />
+
+          <Route path="/header" element={<Headeruser />} />
         </Routes>
 
 
       </div>
+
+
+     
     </Router>
   );
 }
