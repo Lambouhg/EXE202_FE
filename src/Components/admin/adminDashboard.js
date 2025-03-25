@@ -23,18 +23,24 @@ const AdminDashboard = () => {
 
   // Dữ liệu biểu đồ hoạt động gần đây
   const recentActivities = [
-    { user: 'Nguyễn Văn A', action: 'Đặt vé', time: '10:30 AM', route: 'Hà Nội - Sài Gòn' },
-    { user: 'Trần Thị B', action: 'Hủy vé', time: '11:45 AM', route: 'Đà Nẵng - Huế' },
-    { user: 'Lê Văn C', action: 'Đăng ký tài khoản', time: '01:15 PM', route: '' },
-    { user: 'Phạm Thị D', action: 'Thanh toán vé', time: '02:30 PM', route: 'Nha Trang - Đà Lạt' },
+    { user: 'Nguyễn Thanh Ngân', action: 'Đặt vé', time: '10:00 AM', route: 'Đà Lạt - Quy Nhơn' },
+    { user: 'Lý Thanh Tuấn', action: 'Đặt vé', time: '14:00 PM', route: 'Đà Lạt - Quy Nhơn' },
+    { user: 'Nguyễn Lương Như Hảo', action: 'Đặt vé', time: '14:00 PM', route: 'Đà Lạt - Quy Nhơn' },
+    { user: 'Huỳnh Thị Lợi', action: 'Đặt vé', time: '14:00 PM', route: 'Đà Lạt - Quy Nhơn' },
+    { user: 'Diễm Thi', action: 'Đặt vé', time: '14:00 PM', route: 'Đà Lạt - Quy Nhơn' },
+    { user: 'Nguyễn Trần Minh Nhật', action: 'Đặt vé', time: '14:00 PM', route: 'Đà Lạt - Quy Nhơn' },
+    { user: 'Nguyễn Thiên Thanh', action: 'Đặt vé', time: '14:00 PM', route: 'Đà Lạt - Quy Nhơn' },
+    { user: 'Trần Thị Thùy Linh', action: 'Đặt Vé', time: '14:00 PM', route: 'Đà Lạt - Quy Nhơn' },
+    { user: 'Thu Ngan', action: 'đặt vé', time: '20:00 PM', route: 'Sài Gòn - Quy Nhơn' },
+    { user: 'Nguyễn Lương Như Hảo', action: 'đặt vé', time: '19:30 PM', route: 'Quy Nhơn - Đà Lạt' },
   ];
 
   // Thống kê tổng quan
   const stats = [
-    { title: 'Tổng số người dùng', value: '1,234', icon: <User size={20} className="text-blue-500" />, color: 'bg-blue-100 text-blue-800' },
-    { title: 'Vé đã bán trong tháng', value: '856', icon: <CreditCard size={20} className="text-green-500" />, color: 'bg-green-100 text-green-800' },
-    { title: 'Tổng doanh thu', value: '156.8M VNĐ', icon: <DollarSign size={20} className="text-purple-500" />, color: 'bg-purple-100 text-purple-800' },
-    { title: 'Tuyến đường hoạt động', value: '42', icon: <Map size={20} className="text-orange-500" />, color: 'bg-orange-100 text-orange-800' },
+    { title: 'Tổng số người dùng', value: '75', icon: <User size={20} className="text-blue-500" />, color: 'bg-blue-100 text-blue-800' },
+    { title: 'Vé đã bán trong tháng', value: '20', icon: <CreditCard size={20} className="text-green-500" />, color: 'bg-green-100 text-green-800' },
+    { title: 'Tổng doanh thu', value: '7.460.000 VNĐ', icon: <DollarSign size={20} className="text-purple-500" />, color: 'bg-purple-100 text-purple-800' },
+    { title: 'Tuyến đường hoạt động', value: '4', icon: <Map size={20} className="text-orange-500" />, color: 'bg-orange-100 text-orange-800' },
   ];
 
   return (
