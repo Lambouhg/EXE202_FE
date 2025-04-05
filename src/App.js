@@ -26,7 +26,7 @@ import MyTickets from './Components/users/MyTickets';
   import EditUser from './Components/admin/EditUser';
   import TicketDetail from './Components/users/TicketDetail';
   import Headeruser from './Components/users/Header';
-  
+  import QuizGame from './QuizGame';
 // App.js 
 function App() {
  
@@ -40,7 +40,7 @@ function App() {
 
         <Routes>
           {/* Trang chủ */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<QuizGame />} />
 
           {/* Các trang đăng nhập và đăng ký */}
           <Route path="/login" element={<Login />} />
