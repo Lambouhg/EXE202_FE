@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Book, Brain, Trophy, ArrowRight, RefreshCw } from "lucide-react";
-import questions from "./questions.json"; // Import file JSON
+import { Book, Brain, Trophy, ArrowRight, ArrowLeft, RefreshCw, ChevronLeft, ChevronRight } from "lucide-react";
+import questions from "./questions.json";
 import "./index.css";
 
-// Thành tích và phần thưởng
 const achievements = [
   { id: 1, name: "Nhà tư tưởng", description: "Hoàn thành 5 câu hỏi đúng liên tiếp", icon: "🎓" },
   { id: 2, name: "Triết gia", description: "Đạt điểm tuyệt đối trong một lượt chơi", icon: "🏆" },
@@ -24,14 +23,17 @@ export default function QuizGame() {
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   const [showAchievement, setShowAchievement] = useState(false);
   const [totalGames, setTotalGames] = useState(0);
+  const [answersHistory, setAnswersHistory] = useState({});
+  const [scrollPosition, setScrollPosition] = useState(0); // Quản lý vị trí cuộn
 
-  // Timer effect
+  const QUESTIONS_PER_PAGE = 400; // Số câu hỏi hiển thị mỗi lần
+
   useEffect(() => {
     if (mode === "reward" && !showResult && !showExplanation && timeLeft > 0) {
       const timer = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
-            handleAnswerClick(-1); // Auto-submit on timeout
+            handleAnswerClick(-1);
             return 0;
           }
           return prev - 1;
@@ -41,16 +43,15 @@ export default function QuizGame() {
     }
   }, [mode, timeLeft, showResult, showExplanation]);
 
-  // Check achievements
   useEffect(() => {
     if (streak === 5 && !unlockedAchievements.includes(1)) {
-      unlockAchievement(1); // Nhà tư tưởng
+      unlockAchievement(1);
     }
     if (showResult && score === questions.length * 10 && !unlockedAchievements.includes(2)) {
-      unlockAchievement(2); // Triết gia
+      unlockAchievement(2);
     }
     if (totalGames === 3 && !unlockedAchievements.includes(3)) {
-      unlockAchievement(3); // Người học siêng năng
+      unlockAchievement(3);
     }
   }, [streak, showResult, score, totalGames, unlockedAchievements]);
 
@@ -67,6 +68,7 @@ export default function QuizGame() {
     setShowExplanation(true);
     const correct = index === questions[currentQuestion].answer;
     setIsCorrect(correct);
+    setAnswersHistory({ ...answersHistory, [currentQuestion]: index });
 
     if (correct) {
       setStreak(streak + 1);
@@ -85,11 +87,41 @@ export default function QuizGame() {
     setTimeLeft(30);
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
-      setSelectedAnswer(null);
-      setShowExplanation(false);
+      setSelectedAnswer(answersHistory[currentQuestion + 1] ?? null);
+      setShowExplanation(answersHistory[currentQuestion + 1] !== undefined);
+      // Cuộn tự động nếu câu hỏi tiếp theo nằm ngoài vùng hiển thị
+      if (currentQuestion + 1 >= scrollPosition + QUESTIONS_PER_PAGE) {
+        setScrollPosition(scrollPosition + 1);
+      }
     } else {
       setShowResult(true);
       setTotalGames(totalGames + 1);
+    }
+  };
+
+  const prevQuestion = () => {
+    if (currentQuestion > 0) {
+      setTimeLeft(30);
+      setCurrentQuestion(currentQuestion - 1);
+      setSelectedAnswer(answersHistory[currentQuestion - 1] ?? null);
+      setShowExplanation(answersHistory[currentQuestion - 1] !== undefined);
+      // Cuộn tự động nếu câu hỏi trước nằm ngoài vùng hiển thị
+      if (currentQuestion - 1 < scrollPosition) {
+        setScrollPosition(scrollPosition - 1);
+      }
+    }
+  };
+
+  const goToQuestion = (index) => {
+    setTimeLeft(30);
+    setCurrentQuestion(index);
+    setSelectedAnswer(answersHistory[index] ?? null);
+    setShowExplanation(answersHistory[index] !== undefined);
+    // Điều chỉnh vị trí cuộn để câu hỏi được chọn hiển thị
+    if (index < scrollPosition) {
+      setScrollPosition(index);
+    } else if (index >= scrollPosition + QUESTIONS_PER_PAGE) {
+      setScrollPosition(index - QUESTIONS_PER_PAGE + 1);
     }
   };
 
@@ -102,6 +134,20 @@ export default function QuizGame() {
     setStreak(0);
     setTimeLeft(30);
     setMode(null);
+    setAnswersHistory({});
+    setScrollPosition(0);
+  };
+
+  const scrollLeft = () => {
+    if (scrollPosition > 0) {
+      setScrollPosition(scrollPosition - 1);
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollPosition + QUESTIONS_PER_PAGE < questions.length) {
+      setScrollPosition(scrollPosition + 1);
+    }
   };
 
   return (
@@ -239,7 +285,7 @@ export default function QuizGame() {
             animate={{ opacity: 1 }}
             className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-2xl backdrop-blur-lg bg-opacity-90"
           >
-            <div className="mb-8">
+            <div className="mb-6">
               <div className="flex justify-between items-center mb-4">
                 <div className="flex items-center space-x-4">
                   <span className="text-2xl font-bold text-gray-800">
@@ -260,13 +306,60 @@ export default function QuizGame() {
                 )}
               </div>
 
-              <div className="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+              {/* Thanh tiến độ */}
+              <div className="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden mb-2">
                 <motion.div
                   className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-purple-500"
                   initial={{ width: 0 }}
                   animate={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
                   transition={{ duration: 0.5 }}
                 />
+              </div>
+
+              {/* Thanh chọn câu hỏi với cuộn ngang */}
+              <div className="flex items-center gap-2">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={scrollLeft}
+                  disabled={scrollPosition === 0}
+                  className="p-1 disabled:opacity-50"
+                >
+                  <ChevronLeft className="w-5 h-5 text-gray-600" />
+                </motion.button>
+                <div className="flex gap-1 overflow-x-auto scrollbar-hide">
+                  {questions
+                    .slice(scrollPosition, scrollPosition + QUESTIONS_PER_PAGE)
+                    .map((_, index) => {
+                      const questionIndex = scrollPosition + index;
+                      return (
+                        <motion.button
+                          key={questionIndex}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          onClick={() => goToQuestion(questionIndex)}
+                          className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${
+                            questionIndex === currentQuestion
+                              ? "bg-blue-500 text-white"
+                              : answersHistory[questionIndex] !== undefined
+                              ? "bg-green-100 text-green-700"
+                              : "bg-gray-100 text-gray-700"
+                          }`}
+                        >
+                          {questionIndex + 1}
+                        </motion.button>
+                      );
+                    })}
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={scrollRight}
+                  disabled={scrollPosition + QUESTIONS_PER_PAGE >= questions.length}
+                  className="p-1 disabled:opacity-50"
+                >
+                  <ChevronRight className="w-5 h-5 text-gray-600" />
+                </motion.button>
               </div>
             </div>
 
@@ -348,15 +441,27 @@ export default function QuizGame() {
                   </div>
                 </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  onClick={nextQuestion}
-                  className="mt-6 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold shadow-lg text-lg flex items-center justify-center space-x-2 hover:from-blue-600 hover:to-purple-700 transition-all duration-300"
-                >
-                  <span>{currentQuestion === questions.length - 1 ? "Xem kết quả" : "Câu hỏi tiếp theo"}</span>
-                  <ArrowRight className="w-5 h-5" />
-                </motion.button>
+                <div className="mt-6 flex gap-4">
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={prevQuestion}
+                    disabled={currentQuestion === 0}
+                    className="flex-1 bg-gradient-to-r from-gray-500 to-gray-600 text-white px-4 py-4 rounded-xl font-semibold shadow-lg text-lg flex items-center justify-center space-x-2 hover:from-gray-600 hover:to-gray-700 transition-all duration-300 disabled:opacity-50"
+                  >
+                    <ArrowLeft className="w-5 h-5" />
+                    <span>Câu trước</span>
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={nextQuestion}
+                    className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-4 rounded-xl font-semibold shadow-lg text-lg flex items-center justify-center space-x-2 hover:from-blue-600 hover:to-purple-700 transition-all duration-300"
+                  >
+                    <span>{currentQuestion === questions.length - 1 ? "Xem kết quả" : "Câu tiếp"}</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.button>
+                </div>
               </motion.div>
             )}
           </motion.div>
